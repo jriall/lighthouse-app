@@ -4,6 +4,7 @@
   "scripts": {
     "build": "ng build",
     "coverage:backend": "coverage report -m backend/**/*.py",
+    "coverage:frontend": "ng test --watch=false --code-coverage",
     "e2e": "ng e2e",
     "fix:html": "prettier 'frontend/**/*.html' --write",
     "fix:scss": "stylelint 'frontend/**/*.scss' --fix",

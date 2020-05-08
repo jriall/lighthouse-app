@@ -14,11 +14,13 @@ import {SiteListModule} from '../site_list/site_list_module';
 import {SiteOverviewModule} from '../site_overview/site_overview_module';
 
 import {App} from './app';
+import {AppLoadModule} from './app_load_module';
 import {AppRoutingModule} from './app_routing';
 
 @NgModule({
   declarations: [App],
   imports: [
+    AppLoadModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,

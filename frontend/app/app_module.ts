@@ -8,11 +8,11 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 import {environment} from '../environments/environment';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {App} from './app';
+import {AppRoutingModule} from './app_routing';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [App],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -25,7 +25,7 @@ import {AppComponent} from './app.component';
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [App],
 })
 export class AppModule {
 }

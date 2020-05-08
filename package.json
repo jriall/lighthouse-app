@@ -2,12 +2,15 @@
   "name": "lighthouse-app",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "coverage:backend": "coverage report -m backend/**/*.py",
+    "e2e": "ng e2e",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng": "ng",
+    "server": "python backend/main.py",
+    "start": "ng serve",
+    "test:backend": "nose2",
+    "test:frontend": "ng test"
   },
   "private": true,
   "dependencies": {

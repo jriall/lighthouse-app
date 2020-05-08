@@ -1,10 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.html',
-  styleUrls: ['./app.scss'],
+  templateUrl: './site_list.html',
+  styleUrls: ['./site_list.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
+export class SiteList {
 }

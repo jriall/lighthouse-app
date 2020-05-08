@@ -1,17 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ApplicationRoutes} from 'frontend/shared/routes';
+import {ApplicationRoutes} from '../shared/routes';
 
-// TODO(jriall): Replace with auth guard.
+import {Login} from './login';
+
 const routes: Routes = [{
-  path: '',
+  component: Login,
+  path: ApplicationRoutes.LOGIN,
   pathMatch: 'full',
-  redirectTo: ApplicationRoutes.LOGIN,
 }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
+export class LoginRoutingModule {
 }

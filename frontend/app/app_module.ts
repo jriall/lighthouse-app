@@ -6,7 +6,12 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
+import {CreateSiteModule} from '../create_site/create_site_module';
 import {environment} from '../environments/environment';
+import {LoginModule} from '../login/login_module';
+import {NotFoundModule} from '../not_found/not_found_module';
+import {SiteListModule} from '../site_list/site_list_module';
+import {SiteOverviewModule} from '../site_overview/site_overview_module';
 
 import {App} from './app';
 import {AppRoutingModule} from './app_routing';
@@ -17,13 +22,18 @@ import {AppRoutingModule} from './app_routing';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    StoreModule.forRoot({}),
+    CreateSiteModule,
+    EffectsModule.forRoot([]),
+    LoginModule,
+    SiteListModule,
+    SiteOverviewModule,
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 25,
     }),
+    StoreModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([]),
+    NotFoundModule,
   ],
   bootstrap: [App],
 })

@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ApplicationRoutes} from 'frontend/shared/routes';
 
-// TODO(jriall): Replace with auth guard.
+import {ApplicationRoutes} from '../shared/routes';
+
+import {SiteOverview} from './site_overview';
+
 const routes: Routes = [{
-  path: '',
+  component: SiteOverview,
+  path: ApplicationRoutes.SITE_OVERVIEW,
   pathMatch: 'full',
-  redirectTo: ApplicationRoutes.LOGIN,
 }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
+export class SiteOverviewRoutingModule {
 }

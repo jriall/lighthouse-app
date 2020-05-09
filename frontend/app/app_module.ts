@@ -1,10 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EffectsModule} from '@ngrx/effects';
-import {StoreRouterConnectingModule} from '@ngrx/router-store';
-import {StoreModule} from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AuthModule} from 'frontend/auth/auth_module';
 
 import {CreateSiteModule} from '../create_site/create_site_module';

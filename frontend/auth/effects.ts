@@ -38,7 +38,7 @@ export class AuthEffects {
           const user = await this.authService.getUser();
           const name = user.getBasicProfile().getName();
           const email = user.getBasicProfile().getEmail();
-          const accessToken = user.getAuthResponse().access_token;
+          const accessToken = user.getAuthResponse().id_token;
           const authState: AuthState = {
             name,
             email,

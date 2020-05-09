@@ -1,5 +1,6 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
 
 const GAPI_LIBRARY_URL = 'https://apis.google.com/js/api.js';
 const API_KEY = 'AIzaSyBnZ_Xz0n1fMZf1Yd6g0CNz_OJCAPe7Kn8';
@@ -13,7 +14,9 @@ const DISCOVERY_DOCS =
 export class AuthService {
   private googleAuth?: gapi.auth2.GoogleAuth;
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+  constructor(
+      @Inject(DOCUMENT) private readonly document: Document,
+      private readonly store: Store<{}>) {}
 
   loadLibrary(): Promise<void> {
     return new Promise(async (resolve) => {
@@ -57,13 +60,17 @@ export class AuthService {
       'discoveryDocs': DISCOVERY_DOCS,
     });
     this.googleAuth = gapi.auth2.getAuthInstance();
-    this.googleAuth.isSignedIn.listen(() => void this.updateSignInStatus());
-
-    // Set initial sign in status.
-    this.updateSignInStatus();
   }
 
-  private updateSignInStatus() {
-    // TODO(jriall): Integrate into Auth Store.
+  async getUser(): Promise<gapi.auth2.GoogleUser> {
+    const isSignedIn = this.googleAuth.isSignedIn.get();
+    if (!isSignedIn) {
+      await this.googleAuth.signIn();
+    }
+    return this.googleAuth.currentUser.get();
+  }
+
+  logout() {
+    this.googleAuth.signOut();
   }
 }

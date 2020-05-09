@@ -16,3 +16,6 @@ export const selectLoggedInUser =
         name: state.name,
       };
     });
+
+export const selectAccessToken =
+    createSelector(selectAuthFeature, (state: AuthState) => state.accessToken);

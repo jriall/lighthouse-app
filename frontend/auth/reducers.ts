@@ -8,6 +8,7 @@ export interface AuthState {
   isLoggedIn: boolean;
   email?: string;
   name?: string;
+  accessToken?: string;
 }
 
 const INITIAL_STATE: AuthState = {

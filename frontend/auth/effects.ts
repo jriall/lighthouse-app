@@ -38,7 +38,13 @@ export class AuthEffects {
           const user = await this.authService.getUser();
           const name = user.getBasicProfile().getName();
           const email = user.getBasicProfile().getEmail();
-          const authState = {name, email, isLoggedIn: true} as AuthState;
+          const accessToken = user.getAuthResponse().access_token;
+          const authState: AuthState = {
+            name,
+            email,
+            isLoggedIn: true,
+            accessToken,
+          };
           return AuthActions.setLoggedInUser(authState);
         }),
         tap(() => {

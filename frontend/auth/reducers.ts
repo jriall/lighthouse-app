@@ -17,7 +17,9 @@ const INITIAL_STATE: AuthState = {
 const authReducer = createReducer(
     INITIAL_STATE,
     on(AuthActions.login),
-    on(AuthActions.loginSuccess, (_, authState) => ({...authState})),
+    on(AuthActions.getLoggedInUser),
+    on(AuthActions.setLoggedInUser, (_, authState) => ({...authState})),
+    on(AuthActions.loginSuccess),
     on(AuthActions.logout),
     on(AuthActions.logoutSuccess, () => ({...INITIAL_STATE})),
 );

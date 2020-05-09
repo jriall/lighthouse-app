@@ -2,6 +2,8 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 
+import {getLoggedInUser, login, setLoggedInUser} from './actions';
+
 const GAPI_LIBRARY_URL = 'https://apis.google.com/js/api.js';
 const API_KEY = 'AIzaSyBnZ_Xz0n1fMZf1Yd6g0CNz_OJCAPe7Kn8';
 const CLIENT_ID =
@@ -60,13 +62,17 @@ export class AuthService {
       'discoveryDocs': DISCOVERY_DOCS,
     });
     this.googleAuth = gapi.auth2.getAuthInstance();
+
+    if (this.googleAuth.isSignedIn.get()) {
+      this.store.dispatch(getLoggedInUser());
+    }
+  }
+
+  async login(): Promise<gapi.auth2.GoogleUser> {
+    return await this.googleAuth.signIn();
   }
 
   async getUser(): Promise<gapi.auth2.GoogleUser> {
-    const isSignedIn = this.googleAuth.isSignedIn.get();
-    if (!isSignedIn) {
-      await this.googleAuth.signIn();
-    }
     return this.googleAuth.currentUser.get();
   }
 

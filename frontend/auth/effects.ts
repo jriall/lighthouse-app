@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {ApplicationRoutes} from 'frontend/shared/routes';
 import {EMPTY} from 'rxjs';
-import {catchError, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, exhaustMap, map, mergeMap, tap} from 'rxjs/operators';
 
 import * as AuthActions from './actions';
 import {AuthService} from './auth_service';
@@ -12,17 +14,15 @@ export class AuthEffects {
   constructor(
       private readonly action$: Actions,
       private readonly authService: AuthService,
+      private readonly router: Router,
   ) {}
 
   readonly login$ = createEffect(() => {
     return this.action$.pipe(
         ofType(AuthActions.login),
-        mergeMap(async () => {
-          const user = await this.authService.getUser();
-          const name = user.getBasicProfile().getName();
-          const email = user.getBasicProfile().getEmail();
-          const authState = {name, email, isLoggedIn: true} as AuthState;
-          return AuthActions.loginSuccess(authState);
+        exhaustMap(async () => {
+          await this.authService.login();
+          return AuthActions.getLoggedInUser()
         }),
         // Consider showing error message to the user on error, though the main
         // category of error is the user closing the Google login popup, in
@@ -31,11 +31,28 @@ export class AuthEffects {
     );
   });
 
+  readonly getLoggedInUser$ = createEffect(() => {
+    return this.action$.pipe(
+        ofType(AuthActions.getLoggedInUser),
+        exhaustMap(async () => {
+          const user = await this.authService.getUser();
+          const name = user.getBasicProfile().getName();
+          const email = user.getBasicProfile().getEmail();
+          const authState = {name, email, isLoggedIn: true} as AuthState;
+          return AuthActions.setLoggedInUser(authState);
+        }),
+        tap(() => {
+          this.router.navigate([ApplicationRoutes.SITE_LIST]);
+        }),
+    );
+  });
+
   readonly logout$ = createEffect(() => {
     return this.action$.pipe(
         ofType(AuthActions.logout),
         tap(() => {
           this.authService.logout();
+          this.router.navigate([ApplicationRoutes.LOGIN]);
         }),
         map(() => AuthActions.logoutSuccess()),
     );

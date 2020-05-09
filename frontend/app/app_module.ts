@@ -8,7 +8,6 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AuthModule} from 'frontend/auth/auth_module';
 
 import {CreateSiteModule} from '../create_site/create_site_module';
-import {environment} from '../environments/environment';
 import {LoginModule} from '../login/login_module';
 import {NotFoundModule} from '../not_found/not_found_module';
 import {SiteListModule} from '../site_list/site_list_module';
@@ -17,26 +16,21 @@ import {SiteOverviewModule} from '../site_overview/site_overview_module';
 import {App} from './app';
 import {AppLoadModule} from './app_load_module';
 import {AppRoutingModule} from './app_routing';
+import {AppStoreModule} from './store';
 
 @NgModule({
   declarations: [App],
   imports: [
     AppLoadModule,
     AppRoutingModule,
+    AppStoreModule,
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
     CreateSiteModule,
-    EffectsModule.forRoot([]),
     LoginModule,
     SiteListModule,
     SiteOverviewModule,
-    StoreModule.forRoot({}),
-    StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      logOnly: environment.production,
-      maxAge: 25,
-    }),
     NotFoundModule,
   ],
   bootstrap: [App],

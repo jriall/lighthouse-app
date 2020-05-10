@@ -43,6 +43,7 @@ testem.log
 /typings
 *.pyc
 .coverage
+/backend/.env
 
 # System Files
 .DS_Store

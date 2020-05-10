@@ -4,9 +4,7 @@ import flask
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-
-# TODO(jriall): Add to env.
-CLIENT_ID = 'ADD_CLIENT_ID.apps.googleusercontent.com'
+from settings import CLIENT_ID
 
 
 # TODO(jriall): Improve error handling.

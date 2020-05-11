@@ -5,7 +5,6 @@ from decorators import requires_auth_token
 from settings import FIRESTORE_CREDENTIALS_PATH
 from models import Client
 
-
 app = Flask(__name__)
 
 

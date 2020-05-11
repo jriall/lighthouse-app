@@ -1,5 +1,5 @@
 import functools
-import flask
+from flask import request
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -28,7 +28,7 @@ def requires_auth_token(func):
     @functools.wraps(func)
     def inner(*args, **kwargs):
         try:
-            auth_header = flask.request.headers.get('Authorization')
+            auth_header = request.headers.get('Authorization')
             get_user_info(auth_header)
             return func(*args, **kwargs)
         except Exception as e:

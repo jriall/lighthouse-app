@@ -1,9 +1,10 @@
 import functools
-from flask import request
+from flask import current_app, request
 
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
+from models import User
 from settings import CLIENT_ID
 
 
@@ -19,6 +20,12 @@ def get_user_info(auth_header):
             token, requests.Request(), CLIENT_ID)
         if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             raise Exception('Wrong issuer')
+        email, name = id_info['email'], id_info['name']
+        user_cache_key = f'User:{email}'
+        if not current_app.cache.get(user_cache_key):
+            user = User(email=email, name=name)
+            current_app.cache.set(user_cache_key, user)
+            # Write user to DB if they don't exist.
     except:
         raise Exception('User token invalid')
 

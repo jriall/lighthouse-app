@@ -1,11 +1,13 @@
 from firebase_admin import credentials, firestore, initialize_app
-from flask import Flask, jsonify, request
+from flask import current_app, Flask, jsonify, request
+from flask_caching import Cache
 
 from decorators import requires_auth_token
 from settings import FIRESTORE_CREDENTIALS_PATH
 from models import Client
 
 app = Flask(__name__)
+app.cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
 cred = credentials.Certificate(FIRESTORE_CREDENTIALS_PATH)

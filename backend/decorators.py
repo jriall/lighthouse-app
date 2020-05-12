@@ -4,8 +4,12 @@ from flask import current_app, request
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
+from app import db
 from models import User
 from settings import CLIENT_ID
+
+
+users_ref = db.collection('users')
 
 
 # TODO(jriall): Improve error handling.
@@ -25,7 +29,12 @@ def get_user_info(auth_header):
         if not current_app.cache.get(user_cache_key):
             user = User(email=email, name=name)
             current_app.cache.set(user_cache_key, user)
-            # Write user to DB if they don't exist.
+            existing_user_stream = users_ref.where(
+                'email', '==', user.email).limit(1).stream()
+            existing_user = {user.id: user.to_dict()
+                             for user in existing_user_stream}
+            if not existing_user:
+                users_ref.add(user.to_dict())
     except:
         raise Exception('User token invalid')
 

@@ -7,6 +7,11 @@ from settings import CLIENT_ID
 
 
 def get_user_from_request():
+    """Helper to get a User from the current Flask request.
+
+    Returns:
+      An instance of a User
+    """
     auth_header = request.headers.get('Authorization')
     token = auth_header.split(' ')[1]
     id_info = id_token.verify_oauth2_token(

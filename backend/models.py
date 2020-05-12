@@ -1,4 +1,6 @@
 class Client(object):
+    """Defines a client to be associated with a particular site."""
+
     def __init__(self, name):
         self.name = name
 
@@ -14,6 +16,8 @@ class Client(object):
 
 
 class User(object):
+    """Defines a user of the application."""
+
     def __init__(self, name, email):
         self.name = name
         self.email = email

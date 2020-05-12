@@ -13,7 +13,12 @@ users_ref = db.collection('users')
 
 
 # TODO(jriall): Improve error handling.
-def get_user_info(auth_header):
+def validate_user(auth_header):
+    """Gets user info from user's Bearer token in the Authorization header.
+
+    Args:
+      auth_header: Contents of the request Authorization header
+    """
     if not auth_header:
         raise Exception('No auth header provided')
     auth_type, token = auth_header.split(' ')
@@ -40,12 +45,13 @@ def get_user_info(auth_header):
 
 
 def requires_auth_token(func):
+    """A decorator requiring a valid auth token to be passed on the header."""
 
     @functools.wraps(func)
     def inner(*args, **kwargs):
         try:
             auth_header = request.headers.get('Authorization')
-            get_user_info(auth_header)
+            validate_user(auth_header)
             return func(*args, **kwargs)
         except Exception as e:
             return {'success': False, 'message': str(e), 'status_code': 500}

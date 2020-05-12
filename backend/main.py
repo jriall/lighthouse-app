@@ -3,16 +3,10 @@ from flask import current_app, Flask, jsonify, request
 from flask_caching import Cache
 
 from decorators import requires_auth_token
-from settings import FIRESTORE_CREDENTIALS_PATH
 from models import Client
-
-app = Flask(__name__)
-app.cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+from app import app, db
 
 
-cred = credentials.Certificate(FIRESTORE_CREDENTIALS_PATH)
-default_app = initialize_app(cred)
-db = firestore.client()
 client_ref = db.collection('clients')
 
 
@@ -70,5 +64,5 @@ def client(id):
         raise Exception('Method not supported')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

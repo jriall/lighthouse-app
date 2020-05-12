@@ -2,9 +2,9 @@ from firebase_admin import credentials, firestore, initialize_app
 from flask import current_app, Flask, jsonify, request
 from flask_caching import Cache
 
+from app import app, db
 from decorators import requires_auth_token
 from models import Client
-from app import app, db
 
 
 client_ref = db.collection('clients')

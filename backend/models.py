@@ -31,3 +31,42 @@ class User(object):
 
     def __repr__(self):
         return(f'User(name={self.name}, email={self.email}')
+
+
+class ReportResults(object):
+    """Defines the results of an individual report run on a site."""
+
+    def __init__(self, accessibility_score, best_practices_score,
+                 performance_score, pwa_score, seo_score):
+        self.accessibility_score = accessibility_score
+        self.best_practices_score = best_practices_score
+        self.performance_score = performance_score
+        self.pwa_score = pwa_score
+        self.seo_score = seo_score
+
+    @staticmethod
+    def from_dict(dict):
+        return ReportResults(
+            accessibility_score=dict['accessibility_score'],
+            best_practices_score=dict['best_practices_score'],
+            performance_score=dict['performance_score'],
+            pwa_score=dict['pwa_score'],
+            seo_score=dict['seo_score'],
+        )
+
+    def to_dict(self):
+        return {
+            'accessibility_score': self.accessibility_score,
+            'best_practices_score': self.best_practices_score,
+            'performance_score': self.performance_score,
+            'pwa_score': self.pwa_score,
+            'seo_score': self.seo_score,
+        }
+
+    def __repr__(self):
+        return(f'ReportResults(' +
+               f'accessibility_score={self.accessibility_score}, ' +
+               f'best_practices_score={self.best_practices_score}, ' +
+               f'performance_score={self.performance_score}, ' +
+               f'pwa_score={self.pwa_score}, ' +
+               f'seo_score={self.seo_score})')

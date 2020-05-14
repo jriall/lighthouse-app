@@ -9,12 +9,12 @@ import {SiteList} from './site_list';
 const routes: Routes = [{
   canActivate: [AuthGuard],
   component: SiteList,
-  path: ApplicationRoutes.SITE_LIST,
+  path: '',
   pathMatch: 'full',
 }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class SiteListRoutingModule {

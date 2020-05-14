@@ -6,12 +6,12 @@ import {Login} from './login';
 
 const routes: Routes = [{
   component: Login,
-  path: ApplicationRoutes.LOGIN,
+  path: '',
   pathMatch: 'full',
 }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class LoginRoutingModule {

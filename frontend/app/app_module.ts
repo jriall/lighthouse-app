@@ -3,11 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from 'frontend/auth/auth_module';
 
-import {CreateSiteModule} from '../create_site/create_site_module';
-import {LoginModule} from '../login/login_module';
 import {NotFoundModule} from '../not_found/not_found_module';
-import {SiteListModule} from '../site_list/site_list_module';
-import {SiteOverviewModule} from '../site_overview/site_overview_module';
 
 import {App} from './app';
 import {AppLoadModule} from './app_load_module';
@@ -23,10 +19,6 @@ import {AppStoreModule} from './store';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CreateSiteModule,
-    LoginModule,
-    SiteListModule,
-    SiteOverviewModule,
     NotFoundModule,
   ],
   bootstrap: [App],

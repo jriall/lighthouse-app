@@ -8,6 +8,7 @@ import {NotFoundModule} from '../not_found/not_found_module';
 import {App} from './app';
 import {AppLoadModule} from './app_load_module';
 import {AppRoutingModule} from './app_routing';
+import {DEV_MODULES} from './build_specifics';
 import {AppStoreModule} from './store';
 
 @NgModule({
@@ -20,6 +21,7 @@ import {AppStoreModule} from './store';
     BrowserAnimationsModule,
     BrowserModule,
     NotFoundModule,
+    ...DEV_MODULES,
   ],
   bootstrap: [App],
 })

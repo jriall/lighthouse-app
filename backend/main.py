@@ -64,5 +64,35 @@ def client(id):
         raise Exception('Method not supported')
 
 
+@app.route('/api/reports/', methods=['GET', 'POST'])
+@requires_auth_token
+def reports():
+    if request.method == 'GET':
+        # Get a list of all reports.
+        pass
+    elif request.method == 'POST':
+        # Create a new report.
+        pass
+    else:
+        raise Exception('Method not supported')
+
+
+@app.route('/api/reports/<id>', methods=['DELETE', 'GET', 'PATCH'])
+@requires_auth_token
+def report(id):
+    if request.method == 'DELETE':
+        # Delete the report with provided ID. Think about admin rights here.
+        pass
+    elif request.method == 'GET':
+        # Get the report with provided ID.
+        pass
+    elif request.method == 'PATCH':
+        # Update the report with provided ID. Only support certain types of
+        # update.
+        pass
+    else:
+        raise Exception('Method not supported')
+
+
 if __name__ == '__main__':
     app.run()

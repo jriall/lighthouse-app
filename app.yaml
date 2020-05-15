@@ -1,0 +1,11 @@
+runtime: python37
+
+handlers:
+- url: /api/.*
+  script: auto
+- url: /
+  static_files: lighthouse-app/index.html
+  upload: lighthouse-app/index.html
+- url: /
+  static_dir: lighthouse-app
+

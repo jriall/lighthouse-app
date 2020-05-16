@@ -5,7 +5,6 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 import {AUTH_FEATURE_KEY, AuthState} from '../auth/reducers';
-import {environment} from '../environments/environment';
 
 export interface AppState {
   [AUTH_FEATURE_KEY]: AuthState;
@@ -24,10 +23,6 @@ export interface AppState {
       },
     }),
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      logOnly: environment.production,
-      maxAge: 25,
-    }),
   ],
 })
 export class AppStoreModule {

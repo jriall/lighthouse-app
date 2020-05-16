@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from 'frontend/auth/auth_module';
@@ -20,8 +21,12 @@ import {AppStoreModule} from './store';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatSnackBarModule,
     NotFoundModule,
     ...DEV_MODULES,
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000}},
   ],
   bootstrap: [App],
 })

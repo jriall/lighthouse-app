@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+import {SnackBarService} from '../shared/snack_bar_service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,15 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
+  constructor(
+      private readonly snackBarService: SnackBarService,
+      private readonly snackBar: MatSnackBar) {
+    this.listenForSnackBarMessages();
+  }
+
+  private listenForSnackBarMessages() {
+    this.snackBarService.openSnackBar$.subscribe((message) => {
+      this.snackBar.open(message);
+    });
+  }
 }

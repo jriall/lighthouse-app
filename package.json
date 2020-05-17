@@ -5,6 +5,7 @@
     "build": "ng build",
     "coverage:backend": "coverage report -m backend/**/*.py",
     "coverage:frontend": "ng test --watch=false --code-coverage",
+    "deploy:staging": "./scripts/deploy.sh staging",
     "e2e": "ng e2e",
     "fix:html": "prettier 'frontend/**/*.html' --write",
     "fix:scss": "stylelint 'frontend/**/*.scss' --fix",
@@ -42,6 +43,7 @@
     "@ngrx/store": "^9.1.2",
     "@ngrx/store-devtools": "^9.1.2",
     "rxjs": "~6.5.4",
+    "stackdriver-errors-js": "^0.8.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

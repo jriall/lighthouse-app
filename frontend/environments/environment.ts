@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  errorHandlerConfig: {
+    key: '',
+    projectId: '',
+  },
 };
 
 /*

@@ -1,3 +1,4 @@
+import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
@@ -22,6 +23,7 @@ import {AppStoreModule} from './store';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     MatProgressBarModule,
     MatSnackBarModule,
     NotFoundModule,

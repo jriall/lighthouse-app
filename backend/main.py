@@ -64,30 +64,30 @@ def client(id):
         raise Exception('Method not supported')
 
 
-@app.route('/api/reports/', methods=['GET', 'POST'])
+@app.route('/api/sites/', methods=['GET', 'POST'])
 @requires_auth_token
-def reports():
+def sites():
     if request.method == 'GET':
-        # Get a list of all reports.
-        pass
+        # Get a list of all sites.
+        return jsonify({'siteList': []})
     elif request.method == 'POST':
-        # Create a new report.
+        # Create a new site.
         pass
     else:
         raise Exception('Method not supported')
 
 
-@app.route('/api/reports/<id>', methods=['DELETE', 'GET', 'PATCH'])
+@app.route('/api/sites/<id>', methods=['DELETE', 'GET', 'PATCH'])
 @requires_auth_token
-def report(id):
+def site(id):
     if request.method == 'DELETE':
-        # Delete the report with provided ID. Think about admin rights here.
+        # Delete the site with provided ID. Think about admin rights here.
         pass
     elif request.method == 'GET':
-        # Get the report with provided ID.
+        # Get the site with provided ID.
         pass
     elif request.method == 'PATCH':
-        # Update the report with provided ID. Only support certain types of
+        # Update the site with provided ID. Only support certain types of
         # update.
         pass
     else:

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {ApplicationRoutes} from 'frontend/shared/routes';
+import {ApplicationRoute} from 'frontend/shared/routes';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       if (isLoggedIn) {
         return true;
       } else {
-        this.router.navigate([ApplicationRoutes.LOGIN]);
+        this.router.navigate([ApplicationRoute.LOGIN]);
         return false;
       }
     }));

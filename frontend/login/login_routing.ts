@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ApplicationRoutes} from '../shared/routes';
 
 import {Login} from './login';
 

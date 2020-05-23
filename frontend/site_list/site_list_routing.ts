@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from 'frontend/auth/auth_guard';
 
-import {ApplicationRoutes} from '../shared/routes';
-
 import {SiteList} from './site_list';
 
 const routes: Routes = [{

@@ -6,6 +6,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from 'frontend/auth/auth_module';
 
+import {HeaderModule} from '../header/header';
 import {NotFoundModule} from '../not_found/not_found_module';
 
 import {App} from './app';
@@ -24,6 +25,7 @@ import {AppStoreModule} from './store';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HeaderModule,
     HttpClientModule,
     MatProgressBarModule,
     MatSnackBarModule,

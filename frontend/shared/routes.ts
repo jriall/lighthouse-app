@@ -1,4 +1,4 @@
-export enum ApplicationRoutes {
+export enum ApplicationRoute {
   CREATE_SITE = 'sites/create',
   LOGIN = 'login',
   NOT_FOUND = 'not-found',

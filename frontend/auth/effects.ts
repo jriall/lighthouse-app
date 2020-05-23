@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {ApplicationRoutes} from 'frontend/shared/routes';
+import {ApplicationRoute} from 'frontend/shared/routes';
 import {EMPTY} from 'rxjs';
 import {catchError, exhaustMap, map, mergeMap, tap} from 'rxjs/operators';
 
@@ -48,7 +48,7 @@ export class AuthEffects {
           return AuthActions.setLoggedInUser(authState);
         }),
         tap(() => {
-          this.router.navigate([ApplicationRoutes.SITE_LIST]);
+          this.router.navigate([ApplicationRoute.SITE_LIST]);
         }),
     );
   });
@@ -58,7 +58,7 @@ export class AuthEffects {
         ofType(AuthActions.logout),
         tap(() => {
           this.authService.logout();
-          this.router.navigate([ApplicationRoutes.LOGIN]);
+          this.router.navigate([ApplicationRoute.LOGIN]);
         }),
         map(() => AuthActions.logoutSuccess()),
     );

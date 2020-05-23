@@ -1,1 +1,5 @@
-<app-site-form></app-site-form>
+<app-site-form
+  [isSubmitting]="isSubmittingObs$ | async"
+  (createNewSite)="createNewSite($event)"
+>
+</app-site-form>

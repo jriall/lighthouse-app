@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 
 import {NewSiteModel} from './types';
 
-
 @Injectable({providedIn: 'root'})
 export class CreateSiteService {
   constructor(private readonly httpClient: HttpClient) {}

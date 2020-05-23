@@ -1,6 +1,8 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 import {ApplicationRoute} from '../shared/routes';
+
 import {NewSiteModel} from './types';
 
 @Component({
@@ -10,10 +12,15 @@ import {NewSiteModel} from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteForm {
+  @Input() isSubmitting = false;
+  @Output() readonly createNewSite = new EventEmitter<NewSiteModel>();
+  @ViewChild('form', {read: NgForm}) readonly form!: NgForm;
+
   readonly siteModel: NewSiteModel = {name: '', url: ''};
   readonly siteListRoute = `/${ApplicationRoute.SITE_LIST}`;
 
   onSubmit() {
-    // TODO(jriall): Submit form.
+    if (!this.form.valid) return;
+    this.createNewSite.next(this.siteModel);
   }
 }

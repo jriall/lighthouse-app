@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApplicationRoute} from 'frontend/shared/routes';
 import {EMPTY} from 'rxjs';
-import {catchError, exhaustMap, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, exhaustMap, map, tap} from 'rxjs/operators';
 
 import * as AuthActions from './actions';
 import {AuthService} from './auth_service';
@@ -22,7 +22,7 @@ export class AuthEffects {
         ofType(AuthActions.login),
         exhaustMap(async () => {
           await this.authService.login();
-          return AuthActions.getLoggedInUser()
+          return AuthActions.getLoggedInUser({redirect: true})
         }),
         // Consider showing error message to the user on error, though the main
         // category of error is the user closing the Google login popup, in
@@ -31,10 +31,11 @@ export class AuthEffects {
     );
   });
 
+  // TODO(jriall): Improve awkward logic for handling redirect.
   readonly getLoggedInUser$ = createEffect(() => {
     return this.action$.pipe(
         ofType(AuthActions.getLoggedInUser),
-        exhaustMap(async () => {
+        exhaustMap(async ({redirect}) => {
           const user = await this.authService.getUser();
           const name = user.getBasicProfile().getName();
           const email = user.getBasicProfile().getEmail();
@@ -45,11 +46,14 @@ export class AuthEffects {
             isLoggedIn: true,
             accessToken,
           };
-          return AuthActions.setLoggedInUser(authState);
+          return {authState, redirect};
         }),
-        tap(() => {
-          this.router.navigate([ApplicationRoute.SITE_LIST]);
+        tap(({authState, redirect}) => {
+          if (redirect) {
+            this.router.navigate([ApplicationRoute.SITE_LIST]);
+          }
         }),
+        map(({authState}) => AuthActions.setLoggedInUser(authState)),
     );
   });
 

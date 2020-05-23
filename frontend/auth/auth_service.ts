@@ -64,7 +64,7 @@ export class AuthService {
     this.googleAuth = gapi.auth2.getAuthInstance();
 
     if (this.googleAuth.isSignedIn.get()) {
-      this.store.dispatch(getLoggedInUser());
+      this.store.dispatch(getLoggedInUser({redirect: false}));
     }
   }
 

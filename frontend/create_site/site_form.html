@@ -21,6 +21,7 @@
       name="url"
       required
       [disabled]="isSubmitting"
+      [pattern]="validUrlPattern"
     >
     <mat-error>Please enter a valid URL</mat-error>
   </mat-form-field>

@@ -18,6 +18,8 @@ export class SiteForm {
 
   readonly siteModel: NewSiteModel = {name: '', url: ''};
   readonly siteListRoute = `/${ApplicationRoute.SITE_LIST}`;
+  readonly validUrlPattern =
+      '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?[a-zA-Z0-9?=]+';
 
   onSubmit() {
     if (!this.form.valid) return;

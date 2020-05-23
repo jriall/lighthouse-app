@@ -72,7 +72,7 @@ def sites():
         return jsonify({'siteList': []})
     elif request.method == 'POST':
         # Create a new site.
-        pass
+        return jsonify({}), 200
     else:
         raise Exception('Method not supported')
 

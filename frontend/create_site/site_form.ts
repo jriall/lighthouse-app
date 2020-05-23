@@ -1,11 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 import {ApplicationRoute} from '../shared/routes';
-
-interface NewSiteModel {
-  name: string;
-  url: string;
-}
+import {NewSiteModel} from './types';
 
 @Component({
   selector: 'app-site-form',

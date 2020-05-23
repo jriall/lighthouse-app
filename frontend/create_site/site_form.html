@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" #siteForm="ngForm">
+  <h1>Create a new site</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Site name</mat-label>
+    <input matInput [(ngModel)]="siteModel.name" type="text" name="name" required>
+    <mat-error>Name is a required field</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Site URL</mat-label>
+    <input matInput [(ngModel)]="siteModel.url" type="text" name="url" required>
+    <mat-error>Please enter a valid URL</mat-error>
+  </mat-form-field>
+  <div class="cta-wrapper">
+    <a
+      mat-stroked-button
+      color="primary"
+      [routerLink]="siteListRoute"
+    >
+      Cancel
+    </a>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

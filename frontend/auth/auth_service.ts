@@ -2,7 +2,7 @@ import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 
-import {getLoggedInUser, login, setLoggedInUser} from './actions';
+import {getLoggedInUser} from './actions';
 
 const GAPI_LIBRARY_URL = 'https://apis.google.com/js/api.js';
 const API_KEY = 'AIzaSyBnZ_Xz0n1fMZf1Yd6g0CNz_OJCAPe7Kn8';

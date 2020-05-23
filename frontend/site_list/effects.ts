@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {SnackBarService} from 'frontend/shared/snack_bar_service';
 import {of as observableOf} from 'rxjs';
-import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 
 import * as SiteListActions from './actions';
 import {SiteListService} from './site_list_service';

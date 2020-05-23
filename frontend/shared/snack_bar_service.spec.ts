@@ -1,4 +1,3 @@
-import {ReplaySubject} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 
 import {SnackBarService} from './snack_bar_service';

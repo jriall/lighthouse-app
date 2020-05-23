@@ -3,27 +3,29 @@
     <mat-toolbar-row>
       <div class="left">
         <span class="lockup">Lighthouse Dashboard</span>
-        <div class="link-wrapper">
-          <a
-            [routerLink]="ApplicationRoute.SITE_LIST"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact:true}"
-          >
-            Sites
-          </a>
-        </div>
-        <div class="link-wrapper">
-          <a
-            [routerLink]="ApplicationRoute.CREATE_SITE"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}"
-          >
-            Create new site
-          </a>
-        </div>
+        <ng-container *ngIf="isLoggedIn">
+          <div class="link-wrapper">
+            <a
+              [routerLink]="ApplicationRoute.SITE_LIST"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact:true}"
+            >
+              Sites
+            </a>
+          </div>
+          <div class="link-wrapper">
+            <a
+              [routerLink]="ApplicationRoute.CREATE_SITE"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+            >
+              Create new site
+            </a>
+          </div>
+        </ng-container>
       </div>
-      <div class="right">
-        <!-- TODO(jriall): Add account and log out button. -->
+      <div class="right" *ngIf="isLoggedIn">
+        <span>Welcome {{user.name}}</span>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

@@ -1,4 +1,8 @@
 <mat-progress-bar mode="indeterminate" *ngIf="isNavigating$ | async">
 </mat-progress-bar>
-<app-header></app-header>
+<app-header
+  [isLoggedIn]="isLoggedIn$ | async"
+  [user]="user$ | async"
+>
+</app-header>
 <router-outlet></router-outlet>

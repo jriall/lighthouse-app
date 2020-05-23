@@ -1,6 +1,8 @@
-import {ChangeDetectionStrategy, Component, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RouterModule} from '@angular/router';
+import {User} from 'frontend/auth/selectors';
 
 import {ApplicationRoute} from '../shared/routes';
 
@@ -11,13 +13,16 @@ import {ApplicationRoute} from '../shared/routes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
+  @Input() isLoggedIn = false;
+  @Input() user: User;
+
   readonly ApplicationRoute = ApplicationRoute;
 }
 
 @NgModule({
   declarations: [Header],
   exports: [Header],
-  imports: [MatToolbarModule, RouterModule],
+  imports: [CommonModule, MatToolbarModule, RouterModule],
 })
 export class HeaderModule {
 }

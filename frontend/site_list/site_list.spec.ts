@@ -1,14 +1,29 @@
-import {async, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MemoizedSelector} from '@ngrx/store';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
 
+import {SiteListState} from './reducers';
+import {selectSiteList} from './selectors';
 import {SiteList} from './site_list';
+import {CompactSite} from './types';
 
 describe('SiteList component', () => {
+  let fixture: ComponentFixture<SiteList>;
+  let mockStore: MockStore;
+  let mockSiteListSelector: MemoizedSelector<SiteListState, CompactSite[]>;
+
   beforeEach(async(() => {
     TestBed
         .configureTestingModule({
           declarations: [SiteList],
+          providers: [provideMockStore()],
+
         })
         .compileComponents();
+
+    fixture = TestBed.createComponent(SiteList);
+    mockStore = TestBed.inject(MockStore);
+    mockSiteListSelector = mockStore.overrideSelector(selectSiteList, []);
   }));
 
   it('can be instantiated', () => {

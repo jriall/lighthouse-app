@@ -1,5 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 
@@ -18,6 +21,9 @@ import {SiteListTable} from './site_list_table';
   imports: [
     CommonModule,
     EffectsModule.forFeature([SiteListEffects]),
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
     SiteListRoutingModule,
     StoreModule.forFeature(SITE_LIST_FEATURE_KEY, reducer),
   ],

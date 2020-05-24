@@ -9,6 +9,12 @@ from models import Client
 
 client_ref = db.collection('clients')
 
+_MOCK_SITE_LIST = [
+    {'name': 'Test 1', 'url': 'https://example1.com'},
+    {'name': 'Test 2', 'url': 'https://example2.com'},
+    {'name': 'Test 3', 'url': 'https://example3.com'},
+]
+
 
 @app.route('/api/clients/', methods=['GET', 'POST'])
 @requires_auth_token
@@ -69,7 +75,7 @@ def client(id):
 def sites():
     if request.method == 'GET':
         # Get a list of all sites.
-        return jsonify({'siteList': []})
+        return jsonify({'siteList': _MOCK_SITE_LIST})
     elif request.method == 'POST':
         # Create a new site.
         return jsonify({}), 200

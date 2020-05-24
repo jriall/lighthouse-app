@@ -5,6 +5,7 @@ import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {SiteListState} from './reducers';
 import {selectSiteList} from './selectors';
 import {SiteList} from './site_list';
+import {SiteListTable} from './site_list_table';
 import {CompactSite} from './types';
 
 describe('SiteList component', () => {
@@ -15,7 +16,7 @@ describe('SiteList component', () => {
   beforeEach(async(() => {
     TestBed
         .configureTestingModule({
-          declarations: [SiteList],
+          declarations: [SiteList, SiteListTable],
           providers: [provideMockStore()],
 
         })

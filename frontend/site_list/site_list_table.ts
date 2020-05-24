@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
 
 import {CompactSite} from './types';
 
@@ -9,5 +10,11 @@ import {CompactSite} from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteListTable {
-  @Input() siteList: CompactSite[] = [];
+  @Input()
+  set siteList(value: CompactSite[]) {
+    this.dataSource = new MatTableDataSource(value);
+  }
+
+  dataSource: MatTableDataSource<CompactSite>;
+  displayedColumns: ReadonlyArray<string> = ['name', 'url'];
 }

@@ -10,9 +10,33 @@ from models import Client
 client_ref = db.collection('clients')
 
 _MOCK_SITE_LIST = [
-    {'name': 'Test 1', 'url': 'https://example1.com'},
-    {'name': 'Test 2', 'url': 'https://example2.com'},
-    {'name': 'Test 3', 'url': 'https://example3.com'},
+    {
+        'name': 'Test 1',
+        'url': 'https://example1.com',
+        'accessibility_score': 50,
+        'best_practices_score': 50,
+        'performance_score': 50,
+        'pwa_score': 50,
+        'seo_score': 50,
+    },
+    {
+        'name': 'Test 2',
+        'url': 'https://example2.com',
+        'accessibility_score': 50,
+        'best_practices_score': 50,
+        'performance_score': 50,
+        'pwa_score': 50,
+        'seo_score': 50,
+    },
+    {
+        'name': 'Test 3',
+        'url': 'https://example3.com',
+        'accessibility_score': 50,
+        'best_practices_score': 50,
+        'performance_score': 50,
+        'pwa_score': 50,
+        'seo_score': 50,
+    },
 ]
 
 

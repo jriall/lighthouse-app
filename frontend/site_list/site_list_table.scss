@@ -6,6 +6,11 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 50%;
+.name-column,
+.url-column {
+  width: 25%;
+}
+
+.score-column {
+  width: 10%;
 }

@@ -16,5 +16,13 @@ export class SiteListTable {
   }
 
   dataSource: MatTableDataSource<CompactSite>;
-  displayedColumns: ReadonlyArray<string> = ['name', 'url'];
+  readonly displayedColumns: ReadonlyArray<string> = [
+    'name',
+    'url',
+    'accessibility',
+    'performance',
+    'bestPractices',
+    'seo',
+    'pwa',
+  ];
 }

@@ -12,7 +12,6 @@ export class Login {
   constructor(private readonly store: Store<{}>) {}
 
   login() {
-    console.log('YOOOOOOOOO');
     this.store.dispatch(login());
   }
 }

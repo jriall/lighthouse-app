@@ -1,13 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ApplicationRoute} from 'frontend/shared/routes';
 
-// TODO(jriall): Replace with auth guard.
+import {EmptyComponent} from '../shared/empty_component';
+import {ApplicationRoute} from '../shared/routes';
+
+import {HomepageGuard} from './homepage_guard';
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: ApplicationRoute.LOGIN,
+    component: EmptyComponent,
+    canActivate: [HomepageGuard],
   },
   {
     path: ApplicationRoute.CREATE_SITE,

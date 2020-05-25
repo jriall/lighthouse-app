@@ -4,10 +4,11 @@ from flask_caching import Cache
 
 from app import app, db
 from decorators import requires_auth_token
-from models import Client
-
+from models import Client, Site
+from page_speed_insights import PageSpeedInights
 
 client_ref = db.collection('clients')
+site_ref = db.collection('sites')
 
 _MOCK_SITE_LIST = [
     {
@@ -101,8 +102,16 @@ def sites():
         # Get a list of all sites.
         return jsonify({'siteList': _MOCK_SITE_LIST})
     elif request.method == 'POST':
-        # Create a new site.
-        return jsonify({}), 200
+        request_body = request.get_json()
+        name = request_body.get('name', '')
+        url = request_body.get('url', '')
+        try:
+            report_results = PageSpeedInights.run(url)
+            site = Site(name, url, report_results)
+            site_ref.add(site.to_dict())
+            return jsonify({'success': True}), 200
+        except:
+            raise Exception('Page Speed Insights API returned an error')
     else:
         raise Exception('Method not supported')
 

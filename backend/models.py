@@ -33,6 +33,25 @@ class User(object):
         return(f'User(name={self.name}, email={self.email}')
 
 
+class Site(object):
+    """Defines a site."""
+
+    def __init__(self, name, url, report):
+        self.name = name
+        self.url = url
+        self.report = report
+
+    @staticmethod
+    def from_dict(dict):
+        return Site(name=dict['name'], url=dict['url'], report=dict['report'])
+
+    def to_dict(self):
+        return {'name': self.name, 'url': self.url, 'report': self.report.to_dict()}
+
+    def __repr__(self):
+        return(f'Site(name={self.name}, url={self.url}, report={self.report.to_dict()})')
+
+
 class ReportResults(object):
     """Defines the results of an individual report run on a site."""
 

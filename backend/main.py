@@ -6,6 +6,8 @@ from app import app, db
 from decorators import requires_auth_token
 from models import Client, Site
 from page_speed_insights import PageSpeedInights
+from serializers import serialize_site_to_compact
+
 
 client_ref = db.collection('clients')
 site_ref = db.collection('sites')
@@ -99,8 +101,11 @@ def client(id):
 @requires_auth_token
 def sites():
     if request.method == 'GET':
-        # Get a list of all sites.
-        return jsonify({'siteList': _MOCK_SITE_LIST})
+        all_sites = [doc.to_dict() for doc in site_ref.stream()]
+        compact_sites = []
+        for site in all_sites:
+            compact_sites.append(serialize_site_to_compact(site))
+        return jsonify({'siteList': compact_sites}), 200
     elif request.method == 'POST':
         request_body = request.get_json()
         name = request_body.get('name', '')

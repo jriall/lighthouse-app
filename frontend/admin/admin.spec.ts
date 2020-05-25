@@ -1,4 +1,5 @@
 import {async, TestBed} from '@angular/core/testing';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import {Admin} from './admin';
 
@@ -7,6 +8,7 @@ describe('Admin component', () => {
     TestBed
         .configureTestingModule({
           declarations: [Admin],
+          imports: [MatTabsModule],
         })
         .compileComponents();
   }));

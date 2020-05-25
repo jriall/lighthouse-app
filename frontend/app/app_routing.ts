@@ -14,6 +14,11 @@ const routes: Routes = [
     canActivate: [HomepageGuard],
   },
   {
+    path: ApplicationRoute.ADMIN,
+    loadChildren: () =>
+        import('../admin/admin_module').then((module) => module.AdminModule),
+  },
+  {
     path: ApplicationRoute.CREATE_SITE,
     loadChildren: () => import('../create_site/create_site_module')
                             .then((module) => module.CreateSiteModule),

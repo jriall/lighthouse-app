@@ -4,8 +4,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AuthModule} from 'frontend/auth/auth_module';
 
+import {AdminModule} from '../admin/admin_module';
+import {AuthModule} from '../auth/auth_module';
 import {HeaderModule} from '../header/header';
 import {NotFoundModule} from '../not_found/not_found_module';
 
@@ -19,6 +20,7 @@ import {AppStoreModule} from './store';
 @NgModule({
   declarations: [App],
   imports: [
+    AdminModule,
     AppLoadModule,
     AppRoutingModule,
     AppStoreModule,

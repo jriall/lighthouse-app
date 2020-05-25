@@ -12,6 +12,7 @@ export const selectIsLoggedIn =
 export interface User {
   email: string;
   name: string;
+  isAdmin: boolean;
 }
 
 export const selectLoggedInUser =
@@ -19,8 +20,12 @@ export const selectLoggedInUser =
       return {
         email: state.email,
         name: state.name,
+        isAdmin: Boolean(state.isAdmin),
       } as User;
     });
 
 export const selectAccessToken =
     createSelector(selectAuthFeature, (state: AuthState) => state.accessToken);
+
+export const selectIsUserAdmin =
+    createSelector(selectAuthFeature, ({isAdmin}) => isAdmin);

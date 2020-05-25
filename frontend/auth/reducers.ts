@@ -9,6 +9,7 @@ export interface AuthState {
   email?: string;
   name?: string;
   accessToken?: string;
+  isAdmin?: boolean;
 }
 
 const INITIAL_STATE: AuthState = {

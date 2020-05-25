@@ -48,8 +48,8 @@ describe('AppComponent', () => {
     mockIsNavigatingSelector =
         mockStore.overrideSelector(selectIsNavigating, false);
     mockIsLoggedInSelector = mockStore.overrideSelector(selectIsLoggedIn, true);
-    mockIsLoggedInUserSelector =
-        mockStore.overrideSelector(selectLoggedInUser, {email: '', name: ''});
+    mockIsLoggedInUserSelector = mockStore.overrideSelector(
+        selectLoggedInUser, {email: '', name: '', isAdmin: false});
     fixture.detectChanges();
   }));
 

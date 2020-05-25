@@ -9,7 +9,7 @@
       name="name"
       required
       [disabled]="isSubmitting"
-    >
+    />
     <mat-error>Name is a required field</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -22,15 +22,24 @@
       required
       [disabled]="isSubmitting"
       [pattern]="validUrlPattern"
-    >
+    />
     <mat-error>Please enter a valid URL</mat-error>
   </mat-form-field>
-  <div class="cta-wrapper">
-    <a
-      mat-stroked-button
-      color="primary"
-      [routerLink]="siteListRoute"
+  <mat-form-field appearance="outline">
+    <mat-label>Client</mat-label>
+    <mat-select
+      [(ngModel)]="siteModel.client"
+      [disabled]="isSubmitting"
+      required
+      name="client"
     >
+      <mat-option *ngFor="let client of clientList" [value]="client.name">
+        {{client.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="cta-wrapper">
+    <a mat-stroked-button color="primary" [routerLink]="siteListRoute">
       Cancel
     </a>
     <button

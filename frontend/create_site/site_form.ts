@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Client} from 'frontend/shared/client_service';
 
 import {ApplicationRoute} from '../shared/routes';
 
@@ -12,6 +13,7 @@ import {NewSiteModel} from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteForm {
+  @Input() clientList: Client[] = [];
   @Input() isSubmitting = false;
   @Output() readonly createNewSite = new EventEmitter<NewSiteModel>();
   @ViewChild('form', {read: NgForm}) readonly form!: NgForm;

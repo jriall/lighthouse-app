@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {RouterModule} from '@angular/router';
 
 import {CreateSite} from './create_site';
@@ -20,6 +21,7 @@ import {SiteForm} from './site_form';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     RouterModule,
   ],
 })

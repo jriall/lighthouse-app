@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {finalize, takeUntil} from 'rxjs/operators';
 
@@ -21,13 +21,16 @@ enum SnackBarMessage {
 export class CreateSite implements OnDestroy {
   private readonly isSubmitting$ = new BehaviorSubject(false);
   readonly isSubmittingObs$: Observable<boolean> = this.isSubmitting$;
+  readonly clientList = this.route.snapshot.data.clientList;
 
   private readonly destroy$ = new ReplaySubject<void>(1);
 
   constructor(
       private readonly createSiteService: CreateSiteService,
       private readonly snackBarService: SnackBarService,
-      private readonly router: Router) {}
+      private readonly router: Router,
+      private readonly route: ActivatedRoute,
+  ) {}
 
   ngOnDestroy() {
     this.destroy$.next();

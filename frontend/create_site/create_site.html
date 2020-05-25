@@ -1,4 +1,5 @@
 <app-site-form
+  [clientList]="clientList"
   [isSubmitting]="isSubmittingObs$ | async"
   (createNewSite)="createNewSite($event)"
 >

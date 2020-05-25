@@ -33,7 +33,7 @@
       required
       name="client"
     >
-      <mat-option *ngFor="let client of clientList" [value]="client.name">
+      <mat-option *ngFor="let client of clientList" [value]="client.id">
         {{client.name}}
       </mat-option>
     </mat-select>

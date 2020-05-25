@@ -4,6 +4,7 @@ import {Observable, ReplaySubject} from 'rxjs';
 import {shareReplay, switchMap} from 'rxjs/operators';
 
 export interface Client {
+  id: string;
   name: string;
 }
 

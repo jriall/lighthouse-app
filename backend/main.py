@@ -48,7 +48,13 @@ _MOCK_SITE_LIST = [
 @requires_auth_token
 def clients():
     if request.method == 'GET':
-        all_clients = [doc.to_dict() for doc in client_ref.stream()]
+        all_clients = []
+        for doc in client_ref.stream():
+            all_clients.append({
+                'id': doc.id,
+                'name': doc.to_dict()['name'],
+            })
+
         return jsonify(all_clients), 200
     elif request.method == 'POST':
         client_name = request.json.get('name')

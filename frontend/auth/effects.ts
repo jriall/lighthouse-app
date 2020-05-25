@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApplicationRoute} from 'frontend/shared/routes';
-import {EMPTY} from 'rxjs';
-import {catchError, exhaustMap, map, tap} from 'rxjs/operators';
+import {EMPTY, of as observableOf} from 'rxjs';
+import {catchError, exhaustMap, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 
 import * as AuthActions from './actions';
 import {AuthService} from './auth_service';
@@ -53,9 +53,21 @@ export class AuthEffects {
             this.router.navigate([ApplicationRoute.SITE_LIST]);
           }
         }),
-        map(({authState}) => AuthActions.setLoggedInUser(authState)),
+        mergeMap(
+            ({authState}) =>
+                [AuthActions.setLoggedInUser(authState),
+                 AuthActions.checkIfUserIsAdmin({email: authState.email})]),
     );
   });
+
+  readonly checkIfUserIsAdmin$ = createEffect(() => {
+    return this.action$.pipe(
+        ofType(AuthActions.checkIfUserIsAdmin),
+        switchMap(({email}) => this.authService.checkIfUserIsAdmin(email)),
+        tap(console.log), map((user) => user.is_admin),
+        catchError(() => observableOf(false)), tap(console.log),
+        map((is_admin) => AuthActions.checkIfUserIsAdminSuccess({is_admin})));
+  })
 
   readonly logout$ = createEffect(() => {
     return this.action$.pipe(

@@ -11,6 +11,7 @@ from serializers import serialize_site_to_compact
 
 client_ref = db.collection('clients')
 site_ref = db.collection('sites')
+user_ref = db.collection('users')
 
 _MOCK_SITE_LIST = [
     {
@@ -136,6 +137,18 @@ def site(id):
         pass
     else:
         raise Exception('Method not supported')
+
+
+@app.route('/api/users/<email>', methods=['GET'])
+@requires_auth_token
+def user(email):
+    user_stream = user_ref.where(
+        'email', '==', email).limit(1).stream()
+    result = {'user': user.to_dict() for user in user_stream}
+    if result:
+        return jsonify(result['user']), 200
+    else:
+        raise Exception('User not found')
 
 
 if __name__ == '__main__':

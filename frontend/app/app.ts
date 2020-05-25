@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Store} from '@ngrx/store';
 
-import {selectIsLoggedIn, selectLoggedInUser} from '../auth/selectors';
+import {selectIsLoggedIn, selectIsUserAdmin, selectLoggedInUser} from '../auth/selectors';
 import {SnackBarService} from '../shared/snack_bar_service';
 
 import {selectIsNavigating} from './selectors';
@@ -14,6 +14,7 @@ import {selectIsNavigating} from './selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
+  readonly isAdmin$ = this.store.select(selectIsUserAdmin);
   readonly isNavigating$ = this.store.select(selectIsNavigating);
   readonly isLoggedIn$ = this.store.select(selectIsLoggedIn);
   readonly user$ = this.store.select(selectLoggedInUser);

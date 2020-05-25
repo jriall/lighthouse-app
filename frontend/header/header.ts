@@ -14,6 +14,7 @@ import {ApplicationRoute} from '../shared/routes';
 })
 export class Header {
   @Input() isLoggedIn = false;
+  @Input() isAdmin = false;
   @Input() user: User;
 
   readonly ApplicationRoute = ApplicationRoute;

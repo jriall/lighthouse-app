@@ -22,6 +22,15 @@
               Create new site
             </a>
           </div>
+          <div class="link-wrapper" *ngIf="isAdmin">
+            <a
+              [routerLink]="ApplicationRoute.ADMIN"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+            >
+              Admin
+            </a>
+          </div>
         </ng-container>
       </div>
       <div class="right" *ngIf="isLoggedIn">

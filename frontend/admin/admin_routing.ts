@@ -2,12 +2,13 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {Admin} from './admin';
+import {AdminGuard} from './admin_guard';
 
-// TODO(jriall): Add admin guard when ready.
 const routes: Routes = [{
   component: Admin,
   path: '',
   pathMatch: 'full',
+  canActivate: [AdminGuard],
 }];
 
 @NgModule({

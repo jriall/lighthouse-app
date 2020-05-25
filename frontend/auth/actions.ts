@@ -14,3 +14,9 @@ export const setLoggedInUser =
 export const logout = createAction('[Auth] Logout');
 
 export const logoutSuccess = createAction('[Auth] Logout Success');
+
+export const checkIfUserIsAdmin =
+    createAction('[Auth] Check if user is admin', props<{email: string}>());
+
+export const checkIfUserIsAdminSuccess = createAction(
+    '[Auth] Check if user is admin success', props<{is_admin: boolean}>());

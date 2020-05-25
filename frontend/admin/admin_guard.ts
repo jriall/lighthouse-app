@@ -13,8 +13,8 @@ export class AdminGuard implements CanActivate {
       private readonly store: Store<{}>, private readonly router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this.store.select(selectIsUserAdmin).pipe(map((isAdmin) => {
-      if (isAdmin) {
+    return this.store.select(selectIsUserAdmin).pipe(map((is_admin) => {
+      if (is_admin) {
         return true;
       } else {
         this.router.navigate([ApplicationRoute.SITE_LIST]);

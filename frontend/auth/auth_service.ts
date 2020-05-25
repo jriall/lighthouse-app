@@ -1,8 +1,11 @@
 import {DOCUMENT} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
+import {Observable, of as observableOf} from 'rxjs';
 
 import {getLoggedInUser} from './actions';
+import {User} from './selectors';
 
 const GAPI_LIBRARY_URL = 'https://apis.google.com/js/api.js';
 const API_KEY = 'AIzaSyBnZ_Xz0n1fMZf1Yd6g0CNz_OJCAPe7Kn8';
@@ -18,7 +21,8 @@ export class AuthService {
 
   constructor(
       @Inject(DOCUMENT) private readonly document: Document,
-      private readonly store: Store<{}>) {}
+      private readonly store: Store<{}>,
+      private readonly httpClient: HttpClient) {}
 
   loadLibrary(): Promise<void> {
     return new Promise(async (resolve) => {
@@ -78,5 +82,9 @@ export class AuthService {
 
   logout() {
     this.googleAuth.signOut();
+  }
+
+  checkIfUserIsAdmin(email: string): Observable<User> {
+    return this.httpClient.get<User>(`/api/users/${email}`);
   }
 }

@@ -6,7 +6,7 @@ import {By} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MemoizedSelector} from '@ngrx/store';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {selectIsLoggedIn, selectLoggedInUser, User} from 'frontend/auth/selectors';
+import {selectIsLoggedIn, selectIsUserAdmin, selectLoggedInUser, User} from 'frontend/auth/selectors';
 import {HeaderModule} from 'frontend/header/header';
 
 import {App} from './app';
@@ -21,6 +21,7 @@ export class FakeComponent {
 describe('AppComponent', () => {
   let fixture: ComponentFixture<App>;
   let mockStore: MockStore;
+  let mockIsUserAdminSelector: MemoizedSelector<RootState, boolean>;
   let mockIsNavigatingSelector: MemoizedSelector<RootState, boolean>;
   let mockIsLoggedInSelector: MemoizedSelector<RootState, boolean>;
   let mockIsLoggedInUserSelector: MemoizedSelector<RootState, User>;
@@ -48,8 +49,10 @@ describe('AppComponent', () => {
     mockIsNavigatingSelector =
         mockStore.overrideSelector(selectIsNavigating, false);
     mockIsLoggedInSelector = mockStore.overrideSelector(selectIsLoggedIn, true);
+    mockIsUserAdminSelector =
+        mockStore.overrideSelector(selectIsUserAdmin, true);
     mockIsLoggedInUserSelector = mockStore.overrideSelector(
-        selectLoggedInUser, {email: '', name: '', isAdmin: false});
+        selectLoggedInUser, {email: '', name: '', is_admin: false});
     fixture.detectChanges();
   }));
 

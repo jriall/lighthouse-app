@@ -1,0 +1,41 @@
+$button-active-blue: #1669f2;
+$google-blue: #4285f4;
+
+:host {
+  text-align: center;
+}
+
+h1 {
+  margin: 62px auto 32px;
+}
+
+p {
+  margin: 0 0 48px;
+}
+
+button {
+  align-items: center;
+  background-color: $google-blue;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0, .25);
+  color: white;
+  display: flex;
+  font: 500 14px / 20px Roboto;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+
+  &:hover {
+    box-shadow: 0 0 6px $google-blue;
+    cursor: pointer;
+  }
+
+  &:active {
+    background: $button-active-blue;
+  }
+
+  span {
+    margin: auto 8px;
+  }
+}

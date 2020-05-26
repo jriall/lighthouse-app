@@ -5,7 +5,7 @@ from google.cloud import ndb
 
 from app import app, db
 from decorators import requires_auth_token
-from models import Client, Site
+from models import Client, Site, User
 from page_speed_insights import PageSpeedInights
 from serializers import serialize_site_to_compact
 
@@ -51,27 +51,24 @@ _MOCK_SITE_LIST = [
 @requires_auth_token
 def clients():
     if request.method == 'GET':
-        all_clients = []
-        for doc in client_ref.stream():
-            all_clients.append({
-                'id': doc.id,
-                'name': doc.to_dict()['name'],
-            })
-
-        return jsonify(all_clients), 200
+        with datastore_client.context():
+            query = Client.query()
+            all_clients = [{'name': client.name, 'id': client.key.urlsafe().decode('utf-8')}
+                           for client in query]
+            return jsonify(all_clients), 200
     elif request.method == 'POST':
         client_name = request.json.get('name')
         if not client_name:
             raise Exception('Request body must have the name property')
-        existing_client_stream = client_ref.where(
-            'name', '==', client_name).limit(1).stream()
-        existing_client = {client.id: client.to_dict()
-                           for client in existing_client_stream}
-        if existing_client:
-            raise Exception(f'Client with name {client_name} already exists')
-        new_client = Client.from_dict(request.json)
-        client_ref.add(new_client.to_dict())
-        return jsonify({'success': True}), 200
+        with datastore_client.context():
+            query = Client.query().filter(Client.name == client_name)
+            clients = [client.name for client in query]
+            if len(clients) >= 1:
+                raise Exception(
+                    f'Client with name {client_name} already exists')
+            new_client = Client(name=client_name)
+            new_client.put()
+            return jsonify({'success': True}), 200
     else:
         raise Exception('Method not supported')
 
@@ -80,24 +77,30 @@ def clients():
 @requires_auth_token
 def client(id):
     if request.method == 'GET':
-        client = client_ref.document(id).get().to_dict()
-        if client:
-            return jsonify(client), 200
-        else:
-            raise Exception('Client not found')
+        with datastore_client.context():
+            client_key = ndb.Key(urlsafe=id)
+            client = client_key.get()
+            client_response = {
+                'name': client.name,
+                'id': client.key.urlsafe().decode('utf-8'),
+            }
+            if client:
+                return jsonify(client_response), 200
+            else:
+                raise Exception('Client not found')
     if request.method == 'DELETE':
-        client = client_ref.document(id).get().to_dict()
-        if client:
-            client_ref.document(id).delete()
+        client_key = ndb.Key(urlsafe=id)
+        if client_key:
+            client_key.delete()
             return jsonify({'success': True}), 200
         else:
             raise Exception('Client not found')
     if request.method == 'PATCH':
-        client = client_ref.document(id).get().to_dict()
-        if client:
+        client_key = ndb.Key(urlsafe=id)
+        if client_key:
             try:
-                name = request.json['name']
-                client_ref.document(id).update(Client(name=name).to_dict())
+                client_key.name = request.json['name']
+                client_key.put()
                 return jsonify({'success': True}), 200
             except:
                 raise Exception('Client object not formatted correctly')
@@ -151,13 +154,13 @@ def site(id):
 @app.route('/api/users/<email>', methods=['GET'])
 @requires_auth_token
 def user(email):
-    user_stream = user_ref.where(
-        'email', '==', email).limit(1).stream()
-    result = {'user': user.to_dict() for user in user_stream}
-    if result:
-        return jsonify(result['user']), 200
-    else:
-        raise Exception('User not found')
+    with datastore_client.context():
+        query = User.query().filter(User.email == email)
+        users = [user.email for user in query]
+        if users[0]:
+            return jsonify({'success': True}), 200
+        else:
+            raise Exception('User not found')
 
 
 if __name__ == '__main__':

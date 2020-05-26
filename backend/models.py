@@ -12,59 +12,25 @@ class User(ndb.Model):
     email = ndb.StringProperty()
 
 
-class Site(object):
+class Site(ndb.Model):
     """Defines a site."""
+    name = ndb.StringProperty()
+    url = ndb.StringProperty()
+    accessibility_score = ndb.FloatProperty()
+    best_practices_score = ndb.FloatProperty()
+    performance_score = ndb.FloatProperty()
+    pwa_score = ndb.FloatProperty()
+    seo_score = ndb.FloatProperty()
 
-    def __init__(self, name, url, report):
-        self.name = name
-        self.url = url
-        self.report = report
-
-    @staticmethod
-    def from_dict(dict):
-        return Site(name=dict['name'], url=dict['url'], report=dict['report'])
-
-    def to_dict(self):
-        return {'name': self.name, 'url': self.url, 'report': self.report.to_dict()}
-
-    def __repr__(self):
-        return(f'Site(name={self.name}, url={self.url}, report={self.report.to_dict()})')
-
-
-class ReportResults(object):
-    """Defines the results of an individual report run on a site."""
-
-    def __init__(self, accessibility_score, best_practices_score,
-                 performance_score, pwa_score, seo_score):
-        self.accessibility_score = accessibility_score
-        self.best_practices_score = best_practices_score
-        self.performance_score = performance_score
-        self.pwa_score = pwa_score
-        self.seo_score = seo_score
-
-    @staticmethod
-    def from_dict(dict):
-        return ReportResults(
-            accessibility_score=dict['accessibility_score'],
-            best_practices_score=dict['best_practices_score'],
-            performance_score=dict['performance_score'],
-            pwa_score=dict['pwa_score'],
-            seo_score=dict['seo_score'],
-        )
-
-    def to_dict(self):
+    @classmethod
+    def to_compact(cls, site):
         return {
-            'accessibility_score': self.accessibility_score,
-            'best_practices_score': self.best_practices_score,
-            'performance_score': self.performance_score,
-            'pwa_score': self.pwa_score,
-            'seo_score': self.seo_score,
+            'name': site.name,
+            'url': site.url,
+            'id': site.key.urlsafe().decode('utf-8'),
+            'accessibility_score': site.accessibility_score,
+            'best_practices_score': site.best_practices_score,
+            'performance_score': site.performance_score,
+            'seo_score': site.seo_score,
+            'pwa_score': site.pwa_score,
         }
-
-    def __repr__(self):
-        return(f'ReportResults(' +
-               f'accessibility_score={self.accessibility_score}, ' +
-               f'best_practices_score={self.best_practices_score}, ' +
-               f'performance_score={self.performance_score}, ' +
-               f'pwa_score={self.pwa_score}, ' +
-               f'seo_score={self.seo_score})')

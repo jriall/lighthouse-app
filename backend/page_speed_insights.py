@@ -1,6 +1,5 @@
 import requests
 
-from models import ReportResults
 from settings import PAGE_SPEED_INSIGHTS_API_KEY
 
 
@@ -45,7 +44,7 @@ def serialize_page_speed_insights_response(response):
         'accessibility_score': categories['accessibility']['score'],
     }
 
-    return ReportResults.from_dict(serialized_results)
+    return serialized_results
 
 
 def construct_api_request_url(url):

@@ -16,36 +16,6 @@ client_ref = db.collection('clients')
 site_ref = db.collection('sites')
 user_ref = db.collection('users')
 
-_MOCK_SITE_LIST = [
-    {
-        'name': 'Test 1',
-        'url': 'https://example1.com',
-        'accessibility_score': 50,
-        'best_practices_score': 50,
-        'performance_score': 50,
-        'pwa_score': 50,
-        'seo_score': 50,
-    },
-    {
-        'name': 'Test 2',
-        'url': 'https://example2.com',
-        'accessibility_score': 50,
-        'best_practices_score': 50,
-        'performance_score': 50,
-        'pwa_score': 50,
-        'seo_score': 50,
-    },
-    {
-        'name': 'Test 3',
-        'url': 'https://example3.com',
-        'accessibility_score': 50,
-        'best_practices_score': 50,
-        'performance_score': 50,
-        'pwa_score': 50,
-        'seo_score': 50,
-    },
-]
-
 
 @app.route('/api/clients/', methods=['GET', 'POST'])
 @requires_auth_token
@@ -114,19 +84,24 @@ def client(id):
 @requires_auth_token
 def sites():
     if request.method == 'GET':
-        all_sites = [doc.to_dict() for doc in site_ref.stream()]
-        compact_sites = []
-        for site in all_sites:
-            compact_sites.append(serialize_site_to_compact(site))
-        return jsonify({'siteList': compact_sites}), 200
+        with datastore_client.context():
+            query = Site.query()
+            compact_sites = [Site.to_compact(site) for site in query]
+            return jsonify({'siteList': compact_sites}), 200
     elif request.method == 'POST':
         request_body = request.get_json()
         name = request_body.get('name', '')
         url = request_body.get('url', '')
         try:
             report_results = PageSpeedInights.run(url)
-            site = Site(name, url, report_results)
-            site_ref.add(site.to_dict())
+            with datastore_client.context():
+                site = Site(name=name, url=url)
+                site.accessibility_score = report_results['accessibility_score']
+                site.best_practices_score = report_results['best_practices_score']
+                site.performance_score = report_results['performance_score']
+                site.seo_score = report_results['seo_score']
+                site.pwa_score = report_results['pwa_score']
+                site.put()
             return jsonify({'success': True}), 200
         except:
             raise Exception('Page Speed Insights API returned an error')

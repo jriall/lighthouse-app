@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## DataStore credentials
+
+To run the DataStore emulator locally you will need to download a JSON key from
+a service account in the GCP project and save it locally. Then export the path
+to the file as GOOGLE_APPLICATION_CREDENTIALS, typically in your .bashrc or
+.zshrc file. For example:
+
+```sh
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
+```

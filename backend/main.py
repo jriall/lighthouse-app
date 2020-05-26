@@ -4,7 +4,7 @@ from google.cloud import ndb
 
 from app import app, datastore_client
 from google_auth import requires_auth_token, get_user_id_info
-from models import Client, Site, User
+from models import Client, Report, Site, User
 from page_speed_insights import PageSpeedInights
 
 
@@ -77,7 +77,13 @@ def sites():
     if request.method == 'GET':
         with datastore_client.context():
             query = Site.query()
-            compact_sites = [Site.to_compact(site) for site in query]
+            compact_sites = []
+            for site in query:
+                # TODO(jriall): Get latest when there are multiple reports.
+                report = Report.query().filter(Report.site == site.key).fetch(1)
+                compact_site = Site.to_compact(site)
+                compact_site.update(Report.to_dict(report[0]))
+                compact_sites.append(compact_site)
             return jsonify({'siteList': compact_sites}), 200
     elif request.method == 'POST':
         request_body = request.get_json()
@@ -93,12 +99,16 @@ def sites():
                 site = Site(name=name, url=url)
                 site.created_by = user_key
                 site.last_edited_by = user_key
-                site.accessibility_score = report_results['accessibility_score']
-                site.best_practices_score = report_results['best_practices_score']
-                site.performance_score = report_results['performance_score']
-                site.seo_score = report_results['seo_score']
-                site.pwa_score = report_results['pwa_score']
-                site.put()
+                site_key = site.put()
+                report = Report(
+                    site=site_key,
+                    accessibility_score=report_results['accessibility_score'],
+                    best_practices_score=report_results['best_practices_score'],
+                    performance_score=report_results['performance_score'],
+                    seo_score=report_results['seo_score'],
+                    pwa_score=report_results['pwa_score'],
+                )
+                report.put()
             return jsonify({'success': True}), 200
         except:
             raise Exception('Page Speed Insights API returned an error')

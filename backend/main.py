@@ -6,7 +6,6 @@ from app import app, datastore_client
 from google_auth import requires_auth_token, get_user_id_info
 from models import Client, Site, User
 from page_speed_insights import PageSpeedInights
-from serializers import serialize_site_to_compact
 
 
 @app.route('/api/v1/clients/', methods=['GET', 'POST'])

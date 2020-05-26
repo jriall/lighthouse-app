@@ -105,11 +105,22 @@ def sites():
 @requires_auth_token
 def site(id):
     if request.method == 'DELETE':
-        # Delete the site with provided ID. Think about admin rights here.
-        pass
+        with datastore_client.context():
+            try:
+                site_key = ndb.Key(urlsafe=id)
+                site_key.delete()
+                return jsonify({'success': True}), 200
+            except:
+                raise Exception('Site not found')
     elif request.method == 'GET':
-        # Get the site with provided ID.
-        pass
+        with datastore_client.context():
+            try:
+                site_key = ndb.Key(urlsafe=id)
+                site = site_key.get()
+                return jsonify(Site.to_compact(site)), 200
+            except:
+                raise Exception('Site not found')
+
     elif request.method == 'PATCH':
         # Update the site with provided ID. Only support certain types of
         # update.

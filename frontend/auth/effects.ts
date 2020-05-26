@@ -64,8 +64,7 @@ export class AuthEffects {
     return this.action$.pipe(
         ofType(AuthActions.checkIfUserIsAdmin),
         switchMap(({email}) => this.authService.checkIfUserIsAdmin(email)),
-        tap(console.log), map((user) => user.is_admin),
-        catchError(() => observableOf(false)), tap(console.log),
+        map((user) => user.is_admin), catchError(() => observableOf(false)),
         map((is_admin) => AuthActions.checkIfUserIsAdminSuccess({is_admin})));
   })
 

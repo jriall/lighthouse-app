@@ -93,6 +93,7 @@ def sites():
                     User.email == email).fetch(keys_only=True)[0]
                 site = Site(name=name, url=url)
                 site.created_by = user_key
+                site.last_edited_by = user_key
                 site.accessibility_score = report_results['accessibility_score']
                 site.best_practices_score = report_results['best_practices_score']
                 site.performance_score = report_results['performance_score']

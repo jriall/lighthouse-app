@@ -17,6 +17,9 @@ class Site(ndb.Model):
     name = ndb.StringProperty()
     url = ndb.StringProperty()
     created_by = ndb.KeyProperty(kind=User)
+    last_edited_by = ndb.KeyProperty(kind=User)
+    created_on = ndb.DateTimeProperty(auto_now_add=True)
+    last_modified_on = ndb.DateTimeProperty(auto_now=True)
 
     accessibility_score = ndb.FloatProperty()
     best_practices_score = ndb.FloatProperty()

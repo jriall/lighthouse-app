@@ -3,7 +3,7 @@ from flask_caching import Cache
 from google.cloud import ndb
 
 from app import app, datastore_client
-from decorators import requires_auth_token, get_user_id_info
+from google_auth import requires_auth_token, get_user_id_info
 from models import Client, Site, User
 from page_speed_insights import PageSpeedInights
 from serializers import serialize_site_to_compact

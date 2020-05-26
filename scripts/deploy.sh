@@ -23,5 +23,5 @@ sed -i "s/data-appengine-version=\"[^\"]*\"/data-appengine-version=\"${VERSION}\
 ./dist/lighthouse-app/index.html
 
 # Deploy to Appengine
-gcloud app deploy ./dist/app.yaml --quiet --project="lighthouse-app-276618" \
+gcloud app deploy ./dist/app.yaml --quiet --project="lighthouse-app-278410" \
 --version="${VERSION}" --no-promote

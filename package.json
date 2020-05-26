@@ -14,7 +14,7 @@
     "lint:scss": "stylelint 'frontend/**/*.scss'",
     "lint": "npm run lint:html && npm run lint:html",
     "ng": "ng",
-    "server": "python backend/main.py",
+    "server": "gcloud beta emulators datastore start --data-dir=/home/jamesriall/emdir & python backend/main.py",
     "start": "ng serve",
     "test:backend": "nose2",
     "test:frontend": "ng test",

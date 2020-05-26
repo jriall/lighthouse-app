@@ -17,7 +17,7 @@ site_ref = db.collection('sites')
 user_ref = db.collection('users')
 
 
-@app.route('/api/clients/', methods=['GET', 'POST'])
+@app.route('/api/v1/clients/', methods=['GET', 'POST'])
 @requires_auth_token
 def clients():
     if request.method == 'GET':
@@ -43,7 +43,7 @@ def clients():
         raise Exception('Method not supported')
 
 
-@app.route('/api/clients/<id>', methods=['DELETE', 'GET', 'PATCH'])
+@app.route('/api/v1/clients/<id>', methods=['DELETE', 'GET', 'PATCH'])
 @requires_auth_token
 def client(id):
     if request.method == 'GET':
@@ -80,7 +80,7 @@ def client(id):
         raise Exception('Method not supported')
 
 
-@app.route('/api/sites/', methods=['GET', 'POST'])
+@app.route('/api/v1/sites/', methods=['GET', 'POST'])
 @requires_auth_token
 def sites():
     if request.method == 'GET':
@@ -109,7 +109,7 @@ def sites():
         raise Exception('Method not supported')
 
 
-@app.route('/api/sites/<id>', methods=['DELETE', 'GET', 'PATCH'])
+@app.route('/api/v1/sites/<id>', methods=['DELETE', 'GET', 'PATCH'])
 @requires_auth_token
 def site(id):
     if request.method == 'DELETE':
@@ -126,7 +126,7 @@ def site(id):
         raise Exception('Method not supported')
 
 
-@app.route('/api/users/<email>', methods=['GET'])
+@app.route('/api/v1/users/<email>', methods=['GET'])
 @requires_auth_token
 def user(email):
     with datastore_client.context():

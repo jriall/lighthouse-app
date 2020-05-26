@@ -18,7 +18,7 @@ class BasicTests(unittest.TestCase):
         pass
 
     def test_route_returns_success_response(self):
-        response = self.app.get('/api/test/', follow_redirects=True)
+        response = self.app.get('/api/v1/test/', follow_redirects=True)
         expected_response = json.loads(response.get_data(as_text=True)), {
             'response': 'Just getting set up'}
 

@@ -31,7 +31,7 @@ describe('CoursesService', () => {
        service.createSite({name: 'Test site', url: 'https://example.com'})
            .subscribe();
 
-       const req = httpTestingController.expectOne('/api/sites/');
+       const req = httpTestingController.expectOne('/api/v1/sites/');
 
        expect(req.request.method).toEqual('POST');
        expect(req.request.body)

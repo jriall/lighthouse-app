@@ -9,6 +9,6 @@ export class SiteListService {
   constructor(private readonly httpClient: HttpClient) {}
 
   fetchSiteList(): Observable<SiteListApiResponse> {
-    return this.httpClient.get<SiteListApiResponse>('/api/sites/');
+    return this.httpClient.get<SiteListApiResponse>('/api/v1/sites/');
   }
 }

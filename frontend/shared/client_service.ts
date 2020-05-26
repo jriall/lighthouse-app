@@ -13,7 +13,7 @@ export class ClientService {
   private readonly refreshClientList$ = new ReplaySubject<void>(1);
 
   readonly clientList$ = this.refreshClientList$.pipe(
-      switchMap(() => this.httpClient.get<Client[]>('/api/clients/')),
+      switchMap(() => this.httpClient.get<Client[]>('/api/v1/clients/')),
       shareReplay({refCount: true, bufferSize: 1}))
 
   constructor(private readonly httpClient: HttpClient) {}

@@ -9,6 +9,6 @@ export class CreateSiteService {
   constructor(private readonly httpClient: HttpClient) {}
 
   createSite(site: NewSiteModel): Observable<void> {
-    return this.httpClient.post<void>('/api/sites/', site);
+    return this.httpClient.post<void>('/api/v1/sites/', site);
   }
 }

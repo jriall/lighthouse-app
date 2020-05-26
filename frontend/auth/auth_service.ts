@@ -85,6 +85,6 @@ export class AuthService {
   }
 
   checkIfUserIsAdmin(email: string): Observable<User> {
-    return this.httpClient.get<User>(`/api/users/${email}`);
+    return this.httpClient.get<User>(`/api/v1/users/${email}`);
   }
 }

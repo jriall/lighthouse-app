@@ -1,5 +1,6 @@
 from flask import current_app, Flask, jsonify, request
 from flask_caching import Cache
+from google.cloud import ndb
 
 from app import app, datastore_client
 from decorators import requires_auth_token

@@ -1,20 +1,11 @@
-from firebase_admin import credentials, firestore, initialize_app
 from flask import current_app, Flask, jsonify, request
 from flask_caching import Cache
-from google.cloud import ndb
 
-from app import app, db
+from app import app, datastore_client
 from decorators import requires_auth_token
 from models import Client, Site, User
 from page_speed_insights import PageSpeedInights
 from serializers import serialize_site_to_compact
-
-
-datastore_client = ndb.Client()
-
-client_ref = db.collection('clients')
-site_ref = db.collection('sites')
-user_ref = db.collection('users')
 
 
 @app.route('/api/v1/clients/', methods=['GET', 'POST'])

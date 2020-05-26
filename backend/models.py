@@ -16,6 +16,8 @@ class Site(ndb.Model):
     """Defines a site."""
     name = ndb.StringProperty()
     url = ndb.StringProperty()
+    created_by = ndb.KeyProperty(kind=User)
+
     accessibility_score = ndb.FloatProperty()
     best_practices_score = ndb.FloatProperty()
     performance_score = ndb.FloatProperty()

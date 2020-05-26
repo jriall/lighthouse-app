@@ -3,7 +3,7 @@ from flask_caching import Cache
 from google.cloud import ndb
 
 from app import app, datastore_client
-from decorators import requires_auth_token
+from decorators import requires_auth_token, get_user_id_info
 from models import Client, Site, User
 from page_speed_insights import PageSpeedInights
 from serializers import serialize_site_to_compact
@@ -84,10 +84,15 @@ def sites():
         request_body = request.get_json()
         name = request_body.get('name', '')
         url = request_body.get('url', '')
+        id_info = get_user_id_info(request)
+        email = id_info['email']
         try:
             report_results = PageSpeedInights.run(url)
             with datastore_client.context():
+                user_key = User.query().filter(
+                    User.email == email).fetch(keys_only=True)[0]
                 site = Site(name=name, url=url)
+                site.created_by = user_key
                 site.accessibility_score = report_results['accessibility_score']
                 site.best_practices_score = report_results['best_practices_score']
                 site.performance_score = report_results['performance_score']

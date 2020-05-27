@@ -1,0 +1,4 @@
+cron:
+- description: "Update all reports"
+  url: /api/v1/tasks/update-all-sites
+  schedule: every 24 hours 01:00

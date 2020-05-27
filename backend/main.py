@@ -144,6 +144,29 @@ def site(id):
         raise Exception('Method not supported')
 
 
+@app.route('/api/v1/tasks/update-all-sites', methods=['GET'])
+def update_all_sites():
+    appengine_cron_header = request.headers.get('X-Appengine-Cron')
+    if not appengine_cron_header:
+        raise Exception(
+            'This is a cron task which can only be called from within Appengine')
+    with datastore_client.context():
+        sites = Site.query()
+        for site in sites:
+            report_results = PageSpeedInights.run(site.url)
+            report = Report(
+                site=site.key,
+                accessibility_score=report_results['accessibility_score'],
+                best_practices_score=report_results['best_practices_score'],
+                performance_score=report_results['performance_score'],
+                seo_score=report_results['seo_score'],
+                pwa_score=report_results['pwa_score'],
+            )
+            report.put()
+
+    return jsonify({'success': True}), 200
+
+
 @app.route('/api/v1/users/<email>', methods=['GET'])
 @requires_auth_token
 def user(email):

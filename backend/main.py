@@ -50,12 +50,13 @@ def client(id):
             else:
                 raise Exception('Client not found')
     if request.method == 'DELETE':
-        client_key = ndb.Key(urlsafe=id)
-        if client_key:
-            client_key.delete()
-            return jsonify({'success': True}), 200
-        else:
-            raise Exception('Client not found')
+        with datastore_client.context():
+            client_key = ndb.Key(urlsafe=id)
+            if client_key:
+                client_key.delete()
+                return jsonify({'success': True}), 200
+            else:
+                raise Exception('Client not found')
     if request.method == 'PATCH':
         client_key = ndb.Key(urlsafe=id)
         if client_key:

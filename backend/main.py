@@ -79,8 +79,8 @@ def sites():
             query = Site.query()
             compact_sites = []
             for site in query:
-                # TODO(jriall): Get latest when there are multiple reports.
-                report = Report.query().filter(Report.site == site.key).fetch(1)
+                report = Report.query().filter(
+                    Report.site == site.key).order(-Report.created_on).fetch(1)
                 compact_site = Site.to_compact(site)
                 compact_site.update(Report.to_dict(report[0]))
                 compact_sites.append(compact_site)

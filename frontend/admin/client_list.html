@@ -1,4 +1,9 @@
 <div class="mat-elevation-z8">
+  <div class="top-button-wrapper">
+    <button mat-raised-button color="primary" (click)="openNewClientDialog()">
+      Add client
+    </button>
+  </div>
   <table mat-table [dataSource]="dataSource">
     <!-- Name column -->
     <ng-container matColumnDef="name">

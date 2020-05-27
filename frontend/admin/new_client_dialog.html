@@ -1,0 +1,23 @@
+
+<form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+
+  <h2 mat-dialog-title>Create a new client</h2>
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field appearance="outline">
+      <mat-label>Client name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="clientName"
+        type="text"
+        name="name"
+        required
+        [disabled]="isSubmitting"
+      />
+      <mat-error>Name is a required field</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>

@@ -6,6 +6,7 @@ import {ClientListResolver} from '../shared/client_list_resolver';
 import {Admin} from './admin';
 import {AdminGuard} from './admin_guard';
 
+// TODO(jriall): Fix refresh redirecting to site list.
 const routes: Routes = [{
   component: Admin,
   path: '',

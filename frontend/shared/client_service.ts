@@ -22,4 +22,8 @@ export class ClientService {
     this.refreshClientList$.next();
     return this.clientList$;
   }
+
+  deleteClient(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`/api/v1/clients/${id}`);
+  }
 }

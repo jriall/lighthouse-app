@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 
 import {Client} from '../shared/client_service';
@@ -9,6 +9,8 @@ import {Client} from '../shared/client_service';
   styleUrls: ['./client_list.scss'],
 })
 export class ClientList {
+  @Output() readonly deleteClient = new EventEmitter<string>();
+
   @Input()
   set clientList(value: Client[]) {
     this.dataSource = new MatTableDataSource(value);

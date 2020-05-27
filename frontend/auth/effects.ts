@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApplicationRoute} from 'frontend/shared/routes';
 import {EMPTY, of as observableOf} from 'rxjs';
-import {catchError, exhaustMap, map, mergeMap, switchMap, tap} from 'rxjs/operators';
+import {catchError, exhaustMap, map, mapTo, mergeMap, switchMap, tap} from 'rxjs/operators';
 
 import * as AuthActions from './actions';
 import {AuthService} from './auth_service';
@@ -64,7 +64,7 @@ export class AuthEffects {
     return this.action$.pipe(
         ofType(AuthActions.checkIfUserIsAdmin),
         switchMap(({email}) => this.authService.checkIfUserIsAdmin(email)),
-        map((user) => user.is_admin), catchError(() => observableOf(false)),
+        mapTo(true), catchError(() => observableOf(false)),
         map((is_admin) => AuthActions.checkIfUserIsAdminSuccess({is_admin})));
   })
 

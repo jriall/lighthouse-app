@@ -15,8 +15,6 @@ readonly VERSION="$1"
 rm -rf dist/
 npm run build
 rsync -a backend/ dist
-cp app.yaml dist
-cp requirements.txt dist
 
 # Add the Appengine version into the HTML document for Stackdriver.
 sed -i "s/data-appengine-version=\"[^\"]*\"/data-appengine-version=\"${VERSION}\"/" \
@@ -25,3 +23,6 @@ sed -i "s/data-appengine-version=\"[^\"]*\"/data-appengine-version=\"${VERSION}\
 # Deploy to Appengine
 gcloud app deploy ./dist/app.yaml --quiet --project="lighthouse-app-278410" \
 --version="${VERSION}" --no-promote
+
+# Deploy cron tasks
+gcloud app deploy ./dist/cron.yaml

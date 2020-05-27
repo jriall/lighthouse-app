@@ -1,9 +1,11 @@
 <mat-tab-group mat-align-tabs="start">
   <mat-tab label="Clients">
-    <app-client-list
-      [clientList]="clientList$ | async"
-      (deleteClient)="deleteClient($event)"
-    ></app-client-list>
+    <ng-container *ngIf="clientList$ | async as clientList">
+      <app-client-list
+        [clientList]="clientList"
+        (deleteClient)="deleteClient($event)"
+      ></app-client-list>
+    </ng-container>
   </mat-tab>
   <mat-tab label="Users">Users</mat-tab>
 </mat-tab-group>

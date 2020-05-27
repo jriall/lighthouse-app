@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 import {Client} from '../shared/client_service';
@@ -12,6 +13,7 @@ import {NewClientDialog} from './new_client_dialog';
   styleUrls: ['./client_list.scss'],
 })
 export class ClientList {
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Output() readonly deleteClient = new EventEmitter<string>();
 
   @Input()
@@ -24,6 +26,10 @@ export class ClientList {
   dataSource: MatTableDataSource<Client>;
 
   constructor(private readonly matDialog: MatDialog) {}
+
+  ngOnInit() {
+    this.dataSource.sort = this.sort;
+  }
 
   openNewClientDialog() {
     this.matDialog.open(NewClientDialog, {width: '500px'});

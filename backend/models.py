@@ -21,23 +21,12 @@ class Site(ndb.Model):
     created_on = ndb.DateTimeProperty(auto_now_add=True)
     last_modified_on = ndb.DateTimeProperty(auto_now=True)
 
-    accessibility_score = ndb.FloatProperty()
-    best_practices_score = ndb.FloatProperty()
-    performance_score = ndb.FloatProperty()
-    pwa_score = ndb.FloatProperty()
-    seo_score = ndb.FloatProperty()
-
     @classmethod
     def to_compact(cls, site):
         return {
             'name': site.name,
             'url': site.url,
             'id': site.key.urlsafe().decode('utf-8'),
-            'accessibility_score': site.accessibility_score,
-            'best_practices_score': site.best_practices_score,
-            'performance_score': site.performance_score,
-            'seo_score': site.seo_score,
-            'pwa_score': site.pwa_score,
         }
 
 
@@ -47,7 +36,8 @@ class Report(ndb.Model):
     created_on = ndb.DateTimeProperty(auto_now_add=True)
     accessibility_score = ndb.FloatProperty()
     best_practices_score = ndb.FloatProperty()
-    performance_score = ndb.FloatProperty()
+    desktop_performance_score = ndb.FloatProperty()
+    mobile_performance_score = ndb.FloatProperty()
     pwa_score = ndb.FloatProperty()
     seo_score = ndb.FloatProperty()
 
@@ -56,7 +46,8 @@ class Report(ndb.Model):
         return {
             'accessibility_score': report.accessibility_score,
             'best_practices_score': report.best_practices_score,
-            'performance_score': report.performance_score,
+            'desktop_performance_score': report.desktop_performance_score,
+            'mobile_performance_score': report.mobile_performance_score,
             'seo_score': report.seo_score,
             'pwa_score': report.pwa_score,
         }

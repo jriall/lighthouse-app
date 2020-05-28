@@ -105,7 +105,8 @@ def sites():
                     site=site_key,
                     accessibility_score=report_results['accessibility_score'],
                     best_practices_score=report_results['best_practices_score'],
-                    performance_score=report_results['performance_score'],
+                    desktop_performance_score=report_results['desktop_performance_score'],
+                    mobile_performance_score=report_results['mobile_performance_score'],
                     seo_score=report_results['seo_score'],
                     pwa_score=report_results['pwa_score'],
                 )
@@ -159,7 +160,8 @@ def update_all_sites():
                 site=site.key,
                 accessibility_score=report_results['accessibility_score'],
                 best_practices_score=report_results['best_practices_score'],
-                performance_score=report_results['performance_score'],
+                desktop_performance_score=report_results['desktop_performance_score'],
+                mobile_performance_score=report_results['mobile_performance_score'],
                 seo_score=report_results['seo_score'],
                 pwa_score=report_results['pwa_score'],
             )

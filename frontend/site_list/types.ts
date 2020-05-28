@@ -3,7 +3,8 @@ export interface CompactSite {
   url: string;
   accessibility_score: number;
   best_practices_score: number;
-  performance_score: number;
+  mobile_performance_score: number;
+  desktop_performance_score: number;
   pwa_score: number;
   seo_score: number;
 }

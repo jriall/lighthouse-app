@@ -4,7 +4,6 @@ from flask import current_app, request
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-from app import datastore_client
 from models import User
 from settings import CLIENT_ID
 
@@ -22,12 +21,11 @@ def validate_user(request):
     if not current_app.cache.get(user_cache_key):
         user = User(email=email, name=name)
         current_app.cache.set(user_cache_key, user)
-        with datastore_client.context():
-            query = User.query().filter(User.email == email)
-            users = [user.email for user in query]
-            if not users[0]:
-                new_user = User(name=name, email=email)
-                new_user.put()
+        query = User.query().filter(User.email == email)
+        users = [user.email for user in query]
+        if not users[0]:
+            new_user = User(name=name, email=email)
+            new_user.put()
 
 
 def requires_auth_token(func):

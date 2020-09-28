@@ -2,33 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
 
-## Development server
+## Getting started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Install frontend dependencies
 
-## Code scaffolding
+```
+nvm use
+npm ci
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Install backend dependencies
 
-## Build
+```
+virtualenv venv
+source ./venv/bin/activate
+pip install -r requirements.txt
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Google credentials
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## DataStore credentials
-
-To run the DataStore emulator locally you will need to download a JSON key from
+To run the project locally you will need to download a JSON key from
 a service account in the GCP project and save it locally. Then export the path
 to the file as GOOGLE_APPLICATION_CREDENTIALS, typically in your .bashrc or
 .zshrc file. For example:
@@ -36,3 +29,7 @@ to the file as GOOGLE_APPLICATION_CREDENTIALS, typically in your .bashrc or
 ```sh
 export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
 ```
+
+### Run the project
+
+`npm run dev` and hit `localhost:4200`.

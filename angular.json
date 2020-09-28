@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "lighthouse-app"
+  "defaultProject": "lighthouse-app",
+  "cli": {
+    "analytics": false
+  }
 }

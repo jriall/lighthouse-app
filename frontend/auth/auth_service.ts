@@ -8,7 +8,7 @@ import {getLoggedInUser} from './actions';
 import {User} from './selectors';
 
 const GAPI_LIBRARY_URL = 'https://apis.google.com/js/api.js';
-const API_KEY = 'AIzaSyBnZ_Xz0n1fMZf1Yd6g0CNz_OJCAPe7Kn8';
+const API_KEY = 'AIzaSyAhVl6Xuuh3wFaAmeXLgKo2c0FWOBskJvw';
 const CLIENT_ID =
     '530230374647-bibcqu8ahqskao23brrar9ph75q2lvmb.apps.googleusercontent.com';
 const ACCESS_SCOPES = 'https://www.googleapis.com/auth/userinfo.profile';
